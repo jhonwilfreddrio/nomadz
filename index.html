@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOMADZ Riding Club</title>
+  <meta name="description" content="NOMADZ riding club. The rides, the crew, the roads we've covered." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <meta property="og:title" content="NOMADZ Riding Club" />
+  <meta property="og:description" content="The rides, the crew, the roads we've covered." />
+  <meta property="og:image" content="https://nomadz.pages.dev/photos/xix-1.webp" />
+  <link rel="icon" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0b0b0b; --char: #161616; --bone: #ecebe6; --ash: #8d8b85; --line: #2a2a2a;
+      --display: 'Rye', Georgia, serif;
+      --sans: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-size: 1.15rem; line-height: 1.5; background: var(--black); color: var(--bone); }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+    img { display: block; max-width: 100%; }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+
+    header { position: sticky; top: 0; z-index: 5; background: rgba(11,11,11,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { font-family: var(--display); font-size: 1.5rem; text-decoration: none; letter-spacing: .04em; }
+    nav { display: flex; gap: 1.25rem; overflow-x: auto; }
+    nav a { text-decoration: none; text-transform: uppercase; letter-spacing: .15em; font-weight: 600; font-size: .9rem; color: var(--ash); white-space: nowrap; }
+    nav a:hover { color: var(--bone); }
+
+    .hero { text-align: center; padding: 3rem 0 2rem; }
+    .hero img { width: min(360px, 70vw); height: auto; margin: 0 auto; }
+    .hero p { text-transform: uppercase; letter-spacing: .35em; font-weight: 600; color: var(--ash); margin-top: 1rem; }
+
+    .ride { padding: 3rem 0 1rem; }
+    .ride h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: .03em; border-bottom: 1px solid var(--line); padding-bottom: .75rem; margin-bottom: 1rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+    .ride h2 small { font-family: var(--sans); font-size: .9rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ash); font-weight: 600; }
+
+    .grid { columns: 3 320px; column-gap: 12px; }
+    .grid figure { break-inside: avoid; margin-bottom: 12px; cursor: zoom-in; position: relative; overflow: hidden; background: var(--char); }
+    .grid img { width: 100%; height: auto; transition: transform .4s; }
+    .grid figure:hover img { transform: scale(1.02); }
+
+    dialog { border: 0; padding: 0; background: transparent; color: var(--bone); max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+    dialog::backdrop { background: rgba(0,0,0,.94); }
+    .lb { display: grid; grid-template-rows: 1fr auto; height: 100%; padding: 16px; }
+    .lb img { margin: auto; max-height: calc(100vh - 100px); width: auto; object-fit: contain; }
+    .lb-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 10px; }
+    .lb button { font: 700 1rem var(--sans); text-transform: uppercase; letter-spacing: .12em; background: none; border: 1px solid var(--line); color: var(--bone); padding: .5rem 1rem; cursor: pointer; }
+    .lb button:hover { background: var(--bone); color: var(--black); }
+    .lb-cap { color: var(--ash); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+
+    .crew { padding: 5rem 0; border-top: 1px solid var(--line); margin-top: 4rem; text-align: center; }
+    .crew h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); }
+    .crew p { max-width: 34em; margin: 1rem auto 2rem; color: var(--ash); font-size: 1.3rem; }
+    .btn { display: inline-block; text-decoration: none; text-transform: uppercase; letter-spacing: .15em; font-weight: 700; padding: .9rem 1.6rem; background: var(--bone); color: var(--black); }
+    .btn:hover { background: #fff; }
+    footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--ash); font-size: .95rem; text-align: center; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="#top">NOMADZ</a>
+      <nav id="nav"><a href="#crew">Crew</a></nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <img src="logo.webp" alt="NOMADZ patch" width="800" height="799" fetchpriority="high" />
+      <p>Riding Club</p>
+    </section>
+
+    <div id="rides" class="wrap"></div>
+
+    <section class="crew wrap" id="crew">
+      <h2>Ride With Us</h2>
+      <p>We ride out of Metro Manila. Night runs through the city, long days out to Tagaytay, and the national runs when they come around. Find us on Facebook to join the next one.</p>
+      <a class="btn" href="https://www.facebook.com/profile.php?id=61572460597492" target="_blank" rel="noopener">NOMADZ on Facebook</a>
+    </section>
+  </main>
+
+  <footer><div class="wrap">&copy; <span id="yr"></span> NOMADZ Riding Club</div></footer>
+
+  <dialog id="lb" aria-label="Photo viewer">
+    <div class="lb">
+      <img alt="" />
+      <div class="lb-foot">
+        <button data-step="-1" aria-label="Previous photo">&larr; Prev</button>
+        <span class="lb-cap"></span>
+        <button data-step="1" aria-label="Next photo">Next &rarr;</button>
+        <button data-close aria-label="Close">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // Add a ride: drop WebP files in photos/ and list them here. Newest ride first.
+    const RIDES = [
+      { id: 'xix', name: 'National Run XIX', photos: ['xix-1','xix-2','xix-3','xix-4','xix-5','xix-6','xix'] },
+      { id: 'escolta', name: 'Escolta Nights', photos: ['escoltanights-1','escoltanights-2','escoltanights-3','escoltanights-4','escoltanights-5','escoltanights-6','escoltanights-7','escoltanights-8'] },
+      { id: 'moody', name: 'Moody Season', photos: ['moody-season-1','moody-season-2','moody-season-3','moody-season-4','moody-season-5','moody-season-6','moody-season-7','moody-season-8','moody-season-9'] },
+      { id: 'hard', name: 'Hard Night', photos: ['hard-night'] },
+      { id: 'tagaytay', name: 'Solo Tagaytay', photos: ['solo-tagaytay'] },
+    ];
+
+    const all = [];
+    const rides = document.getElementById('rides');
+    const nav = document.getElementById('nav');
+    RIDES.forEach(r => {
+      const sec = document.createElement('section');
+      sec.className = 'ride'; sec.id = r.id;
+      sec.innerHTML = `<h2>${r.name} <small>${r.photos.length} photo${r.photos.length > 1 ? 's' : ''}</small></h2><div class="grid"></div>`;
+      const grid = sec.querySelector('.grid');
+      r.photos.forEach(p => {
+        const i = all.push({ src: `photos/${p}.webp`, cap: r.name }) - 1;
+        const fig = document.createElement('figure');
+        fig.tabIndex = 0;
+        fig.innerHTML = `<img loading="lazy" src="photos/${p}.webp" alt="${r.name}, NOMADZ ride photo">`;
+        fig.onclick = () => open(i);
+        fig.onkeydown = e => { if (e.key === 'Enter') open(i); };
+        grid.append(fig);
+      });
+      rides.append(sec);
+      const a = document.createElement('a'); a.href = '#' + r.id; a.textContent = r.name; nav.insertBefore(a, nav.lastElementChild);
+    });
+
+    const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCap = lb.querySelector('.lb-cap');
+    let at = 0;
+    function open(i) {
+      at = (i + all.length) % all.length;
+      lbImg.src = all[at].src; lbImg.alt = all[at].cap;
+      lbCap.textContent = `${all[at].cap} · ${at + 1} / ${all.length}`;
+      if (!lb.open) lb.showModal();
+    }
+    lb.addEventListener('click', e => {
+      if (e.target.dataset.step) open(at + +e.target.dataset.step);
+      else if ('close' in e.target.dataset || e.target === lb) lb.close();
+    });
+    lb.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') open(at + 1);
+      if (e.key === 'ArrowLeft') open(at - 1);
+    });
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
